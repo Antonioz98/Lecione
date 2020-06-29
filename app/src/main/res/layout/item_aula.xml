@@ -72,7 +72,7 @@
             android:background="?selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:text="Descarmar"
+            android:text="Desmarcar"
             android:textAlignment="center"
             android:textColor="#E53935"
             android:textSize="18sp"

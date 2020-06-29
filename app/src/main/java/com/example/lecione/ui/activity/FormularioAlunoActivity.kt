@@ -8,11 +8,15 @@ import android.widget.Toast
 import com.example.lecione.R
 import com.example.lecione.modelo.ARGUMENTO_ALUNO
 import com.example.lecione.modelo.Aluno
+import com.example.lecione.modelo.simulaAlunos
+import com.example.lecione.ui.viewmodel.AlunoViewModel
 import kotlinx.android.synthetic.main.activity_formulario_aluno.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class FormularioAlunoActivity : AppCompatActivity() {
 
     private var alunoRecebido: Aluno? = null
+    private val viewModel: AlunoViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +41,7 @@ class FormularioAlunoActivity : AppCompatActivity() {
 
     private fun salvar() {
         if (formularioValido()) {
+            viewModel.salva(Aluno(nome = "Arthur Rodrigues Ferreira", telefone = "3515-19684", endereco = "Rua Padre José, 115"))
             finish()
         } else {
             Toast.makeText(this, "Preencha todos os campos obrigatórios!", Toast.LENGTH_SHORT).show()

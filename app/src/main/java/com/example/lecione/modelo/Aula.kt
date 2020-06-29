@@ -1,15 +1,28 @@
 package com.example.lecione.modelo
 
-class Aula(var id: String, var aluno: Aluno, var horario: String, var data: String, var materia: String, var descricao: String, var endereco: String)
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+class Aula(
+    @PrimaryKey(autoGenerate = true) var uid: Int = 0,
+//    @ColumnInfo var aluno: Aluno,
+    @ColumnInfo var horario: String,
+    @ColumnInfo var data: String,
+    @ColumnInfo var materia: String,
+    @ColumnInfo var descricao: String,
+    @ColumnInfo var endereco: String
+)
 
 fun simulaAulas(): List<Aula> {
     return listOf<Aula>(
-        Aula("2", simulaAlunos()[0], "13:00", "25/02/2020", "Matematica", "Continuar Materia", "Escola Martins"),
-        Aula("2", simulaAlunos()[1], "13:00", "25/02/2020", "Matematica", "Continuar Materia", "Escola Martins"),
-        Aula("2", simulaAlunos()[2], "13:00", "25/02/2020", "Matematica", "Continuar Materia", "Escola Martins"),
-        Aula("2", simulaAlunos()[3], "13:00", "25/02/2020", "Matematica", "Continuar Materia", "Escola Martins"),
-        Aula("2", simulaAlunos()[4], "13:00", "25/02/2020", "Matematica", "Continuar Materia", "Escola Martins"),
-        Aula("2", simulaAlunos()[5], "13:00", "25/02/2020", "Matematica", "Continuar Materia", "Escola Martins"),
-        Aula("2", simulaAlunos()[6], "13:00", "25/02/2020", "Matematica", "Continuar Materia", "Escola Martins")
+        Aula(0, "08:00", "25/07/2020", "Espanhol", "Continuar Materia", "Escola de idiomas"),
+        Aula(0, "10:00", "25/07/2020", "Inglês", "Verbo To be", "Escola de idiomas"),
+        Aula(0, "13:00", "25/07/2020", "Espanhol", "Continuar Materia", "Escola de idiomas"),
+        Aula(0, "15:00", "25/07/2020", "Inglês", "Continuar Materia", "Escola de idiomas"),
+        Aula(0, "17:00", "25/07/2020", "Inglês", "Intensivão pré-prova", "Rua Joaquim Freire, 996"),
+        Aula(0, "18:00", "25/07/2020", "Inglês", "Intensivão pré-prova", "Rua Joaquim Freire, 996"),
+        Aula(0, "08:00", "26/07/2020", "Espanhol", "Continuar Materia", "Escola de idiomas")
     )
 }

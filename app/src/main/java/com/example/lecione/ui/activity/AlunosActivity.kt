@@ -6,17 +6,21 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
 import com.example.lecione.R
 import com.example.lecione.modelo.ARGUMENTO_ALUNO
 import com.example.lecione.modelo.Aluno
 import com.example.lecione.modelo.simulaAlunos
 import com.example.lecione.ui.adapter.AlunosAdapter
+import com.example.lecione.ui.viewmodel.AlunoViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_alunos.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class AlunosActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val adapter by lazy { AlunosAdapter(this) }
+    private val viewModel: AlunoViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +28,13 @@ class AlunosActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         configuraDrawer()
         configuraListaDeAlunos()
         configuraFAB()
+        atualizaAlunos()
+    }
+
+    private fun atualizaAlunos() {
+        viewModel.todos().observe(this, Observer {
+            adapter.atualizaAlunos(it)
+        })
     }
 
     private fun configuraFAB() {
@@ -37,7 +48,6 @@ class AlunosActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         adapter.clickListener = {
             abreFormulario(it)
         }
-        adapter.atualizaAlunos(simulaAlunos())
     }
 
     private fun abreFormulario(aluno: Aluno?) {
