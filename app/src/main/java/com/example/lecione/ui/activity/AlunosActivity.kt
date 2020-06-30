@@ -2,6 +2,7 @@ package com.example.lecione.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +11,6 @@ import androidx.lifecycle.Observer
 import com.example.lecione.R
 import com.example.lecione.modelo.ARGUMENTO_ALUNO
 import com.example.lecione.modelo.Aluno
-import com.example.lecione.modelo.simulaAlunos
 import com.example.lecione.ui.adapter.AlunosAdapter
 import com.example.lecione.ui.viewmodel.AlunoViewModel
 import com.google.android.material.navigation.NavigationView
@@ -28,11 +28,16 @@ class AlunosActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         configuraDrawer()
         configuraListaDeAlunos()
         configuraFAB()
+    }
+
+    override fun onResume() {
+        super.onResume()
         atualizaAlunos()
     }
 
     private fun atualizaAlunos() {
         viewModel.todos().observe(this, Observer {
+            Log.e("asdas", "adasda")
             adapter.atualizaAlunos(it)
         })
     }

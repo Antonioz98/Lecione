@@ -19,6 +19,7 @@ class AlunosAdapter(private val context: Context) : RecyclerView.Adapter<AlunoVi
         this.alunos.clear()
         this.alunos.addAll(alunos)
         this.arraylist = alunos
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlunoViewHolder {

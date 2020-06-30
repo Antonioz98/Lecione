@@ -8,5 +8,9 @@ class AlunoViewModel(private val alunoRepository: AlunoRepository) : ViewModel()
 
     fun salva(aluno: Aluno) = alunoRepository.salva(aluno)
 
+    fun edita(aluno: Aluno) = alunoRepository.edita(aluno)
+
     fun todos() = alunoRepository.buscaTodos()
+
+    fun remove(aluno: Aluno) = alunoRepository.remove(aluno)
 }

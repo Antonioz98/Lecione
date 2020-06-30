@@ -13,7 +13,7 @@ class AlunoRepository(private val dao: AlunoDao) {
 
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
-    
+
     fun buscaTodos(): LiveData<List<Aluno>> = dao.todos()
 
     fun salva(aluno: Aluno): LiveData<Resource<Long>> {
@@ -21,6 +21,24 @@ class AlunoRepository(private val dao: AlunoDao) {
             scope.launch {
                 val idPagamento = dao.salva(aluno)
                 liveDate.postValue(Resource(idPagamento))
+            }
+        }
+    }
+
+    fun edita(aluno: Aluno): LiveData<Resource<Int>> {
+        return MutableLiveData<Resource<Int>>().also { liveDate ->
+            scope.launch {
+                val editado = dao.edita(aluno)
+                liveDate.postValue(Resource(editado))
+            }
+        }
+    }
+
+    fun remove(aluno: Aluno): LiveData<Resource<Int>> {
+        return MutableLiveData<Resource<Int>>().also { liveDate ->
+            scope.launch {
+                val deletado = dao.remove(aluno)
+                liveDate.postValue(Resource(deletado))
             }
         }
     }
