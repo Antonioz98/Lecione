@@ -18,4 +18,7 @@ interface AlunoDao {
 
     @Query("SELECT * FROM Aluno")
     fun todos(): LiveData<List<Aluno>>
+
+    @Query("DELETE FROM Aula WHERE alunoId = :alunoId")
+    fun alunoExcluido(alunoId: Int)
 }

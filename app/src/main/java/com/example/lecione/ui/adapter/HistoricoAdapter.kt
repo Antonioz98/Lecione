@@ -3,19 +3,23 @@ package com.example.lecione.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lecione.R
 import com.example.lecione.modelo.Aula
+import com.example.lecione.modelo.AulaAcao
 import com.example.lecione.ui.viewholder.HistoricoViewHolder
 
 class HistoricoAdapter(private val context: Context) : RecyclerView.Adapter<HistoricoViewHolder>() {
 
     private val aulas = mutableListOf<Aula>()
-    lateinit var clickListener: (Aula, Int) -> Unit
+    lateinit var clickListener: (Aula, AulaAcao) -> Unit
+    lateinit var preencheNomeAluno: (Int, TextView) -> Unit
 
     fun atualizaAulas(aulas: List<Aula>) {
         this.aulas.clear()
         this.aulas.addAll(aulas)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoricoViewHolder {
@@ -28,6 +32,6 @@ class HistoricoAdapter(private val context: Context) : RecyclerView.Adapter<Hist
     }
 
     override fun onBindViewHolder(holder: HistoricoViewHolder, position: Int) {
-        holder.bindView(aulas[position], clickListener)
+        holder.bindView(aulas[position], clickListener, preencheNomeAluno)
     }
 }

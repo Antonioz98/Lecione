@@ -3,6 +3,7 @@ package com.example.lecione.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lecione.database.dao.AlunoDao
+import com.example.lecione.database.dao.AulaDao
 import com.example.lecione.modelo.Aluno
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,6 +39,7 @@ class AlunoRepository(private val dao: AlunoDao) {
         return MutableLiveData<Resource<Int>>().also { liveDate ->
             scope.launch {
                 val deletado = dao.remove(aluno)
+                dao.alunoExcluido(aluno.uid)
                 liveDate.postValue(Resource(deletado))
             }
         }

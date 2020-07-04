@@ -37,7 +37,6 @@ class AlunosActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     private fun atualizaAlunos() {
         viewModel.todos().observe(this, Observer {
-            Log.e("asdas", "adasda")
             adapter.atualizaAlunos(it)
         })
     }
@@ -77,7 +76,7 @@ class AlunosActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             R.id.nav_historico -> HistoricoActivity::class.java
             else -> MarcarAulaActivity::class.java
         }
-        item.isChecked = false
+        item.isCheckable = false
         drawer_layout.closeDrawer(GravityCompat.START)
 
         val intent = Intent(this, activity)

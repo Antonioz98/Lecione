@@ -2,27 +2,36 @@ package com.example.lecione.modelo
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
+import java.io.Serializable
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Entity
-class Aula(
-    @PrimaryKey(autoGenerate = true) var uid: Int = 0,
-//    @ColumnInfo var aluno: Aluno,
-    @ColumnInfo var horario: String,
-    @ColumnInfo var data: String,
-    @ColumnInfo var materia: String,
-    @ColumnInfo var descricao: String,
-    @ColumnInfo var endereco: String
-)
+class Aula() : Serializable {
+    @PrimaryKey(autoGenerate = true)
+    var uid: Int = 0
 
-fun simulaAulas(): List<Aula> {
-    return listOf<Aula>(
-        Aula(0, "08:00", "25/07/2020", "Espanhol", "Continuar Materia", "Escola de idiomas"),
-        Aula(0, "10:00", "25/07/2020", "Inglês", "Verbo To be", "Escola de idiomas"),
-        Aula(0, "13:00", "25/07/2020", "Espanhol", "Continuar Materia", "Escola de idiomas"),
-        Aula(0, "15:00", "25/07/2020", "Inglês", "Continuar Materia", "Escola de idiomas"),
-        Aula(0, "17:00", "25/07/2020", "Inglês", "Intensivão pré-prova", "Rua Joaquim Freire, 996"),
-        Aula(0, "18:00", "25/07/2020", "Inglês", "Intensivão pré-prova", "Rua Joaquim Freire, 996"),
-        Aula(0, "08:00", "26/07/2020", "Espanhol", "Continuar Materia", "Escola de idiomas")
-    )
+    @ColumnInfo
+    var data: Calendar = Calendar.getInstance()
+
+    @ColumnInfo
+    var materia: String = String()
+
+    @ColumnInfo
+    var descricao: String = String()
+
+    @ColumnInfo
+    var endereco: String = String()
+
+    @ForeignKey(entity = Aluno::class, parentColumns = ["uid"], childColumns = ["alunoId"], onUpdate = CASCADE, onDelete = CASCADE)
+    @ColumnInfo
+    var alunoId: Int = 0
+
+    fun dataFormatada(): String {
+        val utcFormat = SimpleDateFormat("dd/MM/yyyy' 'HH:mm")
+        return utcFormat.format(data.time)
+    }
 }
