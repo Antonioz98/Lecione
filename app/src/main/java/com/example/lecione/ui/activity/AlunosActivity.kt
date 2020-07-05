@@ -2,22 +2,18 @@ package com.example.lecione.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import com.example.lecione.R
 import com.example.lecione.modelo.ARGUMENTO_ALUNO
 import com.example.lecione.modelo.Aluno
 import com.example.lecione.ui.adapter.AlunosAdapter
 import com.example.lecione.ui.viewmodel.AlunoViewModel
-import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_alunos.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class AlunosActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class AlunosActivity : AppCompatActivity() {
 
     private val adapter by lazy { AlunosAdapter(this) }
     private val viewModel: AlunoViewModel by viewModel()
@@ -25,7 +21,9 @@ class AlunosActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alunos)
-        configuraDrawer()
+        title = getString(R.string.title_activity_alunos)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
         configuraListaDeAlunos()
         configuraFAB()
     }
@@ -47,6 +45,11 @@ class AlunosActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finish()
+        return true
+    }
+
     private fun configuraListaDeAlunos() {
         alunos_recyclerView.adapter = adapter
         adapter.clickListener = {
@@ -58,29 +61,5 @@ class AlunosActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         val intent = Intent(this, FormularioAlunoActivity::class.java)
         intent.putExtra(ARGUMENTO_ALUNO, aluno)
         startActivity(intent)
-    }
-
-    private fun configuraDrawer() {
-        setSupportActionBar(toolbar)
-        ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close).let {
-            drawer_layout.addDrawerListener(it)
-            it.syncState()
-        }
-        nav_view.setNavigationItemSelectedListener(this)
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val activity = when (item.itemId) {
-            R.id.nav_marcar_aula -> MarcarAulaActivity::class.java
-            R.id.nav_proximas_aulas -> AulasActivity::class.java
-            R.id.nav_historico -> HistoricoActivity::class.java
-            else -> MarcarAulaActivity::class.java
-        }
-        item.isCheckable = false
-        drawer_layout.closeDrawer(GravityCompat.START)
-
-        val intent = Intent(this, activity)
-        startActivity(intent)
-        return true
     }
 }

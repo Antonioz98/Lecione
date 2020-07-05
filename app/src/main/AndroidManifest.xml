@@ -10,13 +10,12 @@
         android:supportsRtl="true"
         android:name=".AppApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.HistoricoActivity"></activity>
-        <activity android:name=".ui.activity.AulasActivity" />
+        <activity android:name=".ui.activity.HistoricoActivity"/>
+        <activity android:name=".ui.activity.AlunosActivity" />
         <activity android:name=".ui.activity.MarcarAulaActivity" />
         <activity android:name=".ui.activity.FormularioAlunoActivity" />
         <activity
-            android:name=".ui.activity.AlunosActivity"
-            android:label="@string/title_activity_alunos"
+            android:name=".ui.activity.AulasActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

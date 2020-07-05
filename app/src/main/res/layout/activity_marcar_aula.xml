@@ -23,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ex: Jaqueline Costa"
-            android:focusable="false"
             android:inputType="text" />
 
         <TextView
@@ -56,9 +55,9 @@
             android:id="@+id/marcar_aula_assunto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
             android:hint="Ex: Inglês"
-            android:maxLength="13" />
+            android:inputType="text"
+            android:maxLength="20" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:gravity="start"
-            android:maxLength="13" />
+            android:maxLength="100" />
 
         <Button
             android:id="@+id/marcar_aula_salvar"
